@@ -1,0 +1,5 @@
+.idea
+api/__pycache__
+rpc/__pycache__
+api/images/*.png
+api/config.yaml

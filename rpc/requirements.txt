@@ -1,0 +1,9 @@
+beautifulsoup4==4.6.0
+Bottleneck==1.2.1
+bs4==0.0.1
+json-rpc==1.11.0
+lxml==4.2.3
+pandas==0.23.1
+tushare==1.2.4
+waitress==1.1.0
+Werkzeug==0.14.1
