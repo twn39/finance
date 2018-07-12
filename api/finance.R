@@ -38,13 +38,14 @@ getDataFromRPC <- function(code, start, end, index) {
 }
 
 
-png(paste('./images/', opt$code, opt$from, opt$to, '.png', sep=''), width = 2300, height=1060)
+png(paste('./images/', opt$code, opt$from, opt$to, '.png', sep=''), width = 2300, height=1660)
 # data = getSymbols(opt$code, from=opt$from, to=opt$to, auto.assign=FALSE)
 data <- getDataFromRPC(opt$code, opt$from, opt$to, opt$index)
 chartSeries(data)
 addBBands()
 addMACD()
 addRSI()
+addCCI()
 dev.off()
 
 
