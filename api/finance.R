@@ -8,6 +8,7 @@ spec = matrix(c(
   'code', 'c', 1, "character",
   'from', 'f', 1, "character",
   'to', 't', 1, "character",
+  'index', 'i', 1, "logical",
   'help', 'h', 0, "logical"
 
 ), byrow=TRUE, ncol=4)
@@ -28,8 +29,8 @@ library("quantmod")
 library("jsonlite")
 library('httr')
 
-getDataFromRPC <- function(code, start, end) {
-  body <- list(method='get_k_data', jsonrpc='2.0', params=list(code=code, start=start, end=end), id=0)
+getDataFromRPC <- function(code, start, end, index) {
+  body <- list(method='get_k_data', jsonrpc='2.0', params=list(code=code,index=index, start=start, end=end), id=0)
   response <- POST("localhost:4000", add_headers('Content-Type'='application/json'), body=body, encode = "json")
   data <- fromJSON(content(response)$result)
   result <- as.xts(data[, -1], order.by=as.Date(data$date, format='%Y-%m-%d'))
@@ -39,8 +40,7 @@ getDataFromRPC <- function(code, start, end) {
 
 png(paste('./images/', opt$code, opt$from, opt$to, '.png', sep=''), width = 2300, height=1060)
 # data = getSymbols(opt$code, from=opt$from, to=opt$to, auto.assign=FALSE)
-
-data <- getDataFromRPC(opt$code, opt$from, opt$to)
+data <- getDataFromRPC(opt$code, opt$from, opt$to, opt$index)
 chartSeries(data)
 addBBands()
 addMACD()

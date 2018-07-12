@@ -19,9 +19,10 @@ def fetch_data():
     code = request.form['code']
     start = request.form['from']
     end = request.form['to']
+    index = request.form['index']
     config_yaml = yaml.load(open('config.yaml', encoding="utf-8"))
     config_cdn = config_yaml['CDN']
-    command = u'Rscript ./finance.R -c "{0}" -f "{1}" -t "{2}"'.format(code, start, end)
+    command = u'Rscript ./finance.R -c "{0}" -f "{1}" -t "{2}" -i "{3}"'.format(code, start, end, index)
     status = os.system(command)
     file_name = '{0}{1}{2}.png'.format(code, start, end)
 
